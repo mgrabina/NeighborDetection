@@ -10,4 +10,8 @@ public class Cell {
     public void addParticle(Particle particle){
         this.particles.add(particle);
     }
+
+    public int getParticlesQuantity(){
+        return particles.size();
+    }
 }

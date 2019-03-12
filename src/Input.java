@@ -10,17 +10,21 @@ import java.util.Map;
 
 public class Input {
 
+    // Defined values
+    private final Long systemSideLength = Long.valueOf(20);
+    private final Double interactionRadio = 0.25;
+
+
     private Long particlesQuantity;
 
     private Long cellSideQuantity;
 
-    private final Long systemSideLength = Long.valueOf(20);
-
-    private final Double interactionRadio = 0.25;
-
     private List<Particle> particles;
 
-    public Input(String staticFileName, String dinamicFileName) throws IOException{
+    private Boolean contornCondition;
+
+    public Input(String staticFileName, String dinamicFileName, Boolean contornCondition) throws IOException{
+        this.contornCondition = contornCondition;
         BufferedReader staticFileReader, dinamicFileReader;
         try{
             // Static file
@@ -32,9 +36,9 @@ public class Input {
             dinamicFileReader.readLine();  //Discard first time notation
             while(staticFileReader.ready()){    //Only time zero for dinamic file
                 String[] staticLineValues = staticFileReader.readLine().split(" ");
-                String[] dinamicLineValues = staticFileReader.readLine().split(" ");
+                String[] dinamicLineValues = dinamicFileReader.readLine().split(" ");
                 particles.add(new Particle(
-                        Long.valueOf(staticLineValues[0]),
+                        Double.valueOf(staticLineValues[0]),
                         staticLineValues[1],
                         Double.valueOf(dinamicLineValues[0]),
                         Double.valueOf(dinamicLineValues[1]),
@@ -73,5 +77,9 @@ public class Input {
 
     public List<Particle> getParticles() {
         return particles;
+    }
+
+    public Boolean getContornCondition() {
+        return contornCondition;
     }
 }

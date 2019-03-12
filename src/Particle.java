@@ -6,23 +6,23 @@ public class Particle {
     private static Long ID_ACUM = Long.valueOf(0);
 
     private Long id;
-    private Long radio;
+    private Double radio;
     private String property;
     private List<State> states = new ArrayList<>();
 
-    public Particle(Long radio, String property, Double x, Double y, Double vx, Double vy) {
+    public Particle(Double radio, String property, Double x, Double y, Double vx, Double vy) {
         this.id = ID_ACUM++;
         this.radio = radio;
         this.property = property;
         states.add(new State(x, y, vx, vy));
     }
 
-    public Particle(Long radio, String property) {
+    public Particle(Double radio, String property) {
         this.radio = radio;
         this.property = property;
     }
 
-    public Long getRadio() {
+    public Double getRadio() {
         return radio;
     }
 
