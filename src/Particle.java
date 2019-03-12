@@ -3,11 +3,15 @@ import java.util.List;
 
 public class Particle {
 
+    private static Long ID_ACUM = Long.valueOf(0);
+
+    private Long id;
     private Long radio;
     private String property;
     private List<State> states = new ArrayList<>();
 
     public Particle(Long radio, String property, Double x, Double y, Double vx, Double vy) {
+        this.id = ID_ACUM++;
         this.radio = radio;
         this.property = property;
         states.add(new State(x, y, vx, vy));
@@ -32,6 +36,10 @@ public class Particle {
 
     public void addState(Double x, Double y, Double vx, Double vy){
         states.add(new State(x,y,vx,vy));
+    }
+
+    public Long getId() {
+        return id;
     }
 
     class State{

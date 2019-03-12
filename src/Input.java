@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Inputs {
+public class Input {
 
     private Long particlesQuantity;
 
@@ -20,7 +20,7 @@ public class Inputs {
 
     private List<Particle> particles;
 
-    public Inputs(String staticFileName, String dinamicFileName) throws IOException{
+    public Input(String staticFileName, String dinamicFileName) throws IOException{
         BufferedReader staticFileReader, dinamicFileReader;
         try{
             // Static file
@@ -44,6 +44,7 @@ public class Inputs {
             }
             if (particles.size() != particlesQuantity)
                 throw new IllegalArgumentException();
+            // TODO: Validar L/M > Rc
 //            TODO: More than one state per particle
 //            while(dinamicFileReader.ready()){
 //                 dinamicFileReader.readLine();  //Discard time notation
