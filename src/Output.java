@@ -35,10 +35,10 @@ public class Output {
     public static void printGrid(Grid grid){
         System.out.println("Side Cells Quantity: " + grid.getSideCellsQuantity());
         System.out.println("Side Length: " + grid.getSideLength());
-        System.out.println("Cell Side Length: " + grid.getSideLength() / grid.getSideCellsQuantity());
+        System.out.println("Cell Side Length: " + Double.valueOf(grid.getSideLength()) / Double.valueOf(grid.getSideCellsQuantity()));
         for (int i = 0 ; i < grid.getSideCellsQuantity() ; i++){
             for (int j = 0 ; j < grid.getSideCellsQuantity() ; j++){
-                System.out.print("|"+grid.getCell(i, j).getParticlesQuantity()+"|");
+                System.out.print("|"+String.format("%02d", grid.getCell(i, j).getParticlesQuantity())+"|");
             }
             System.out.println("");
         }
@@ -50,6 +50,13 @@ public class Output {
             System.out.print("["+particle.getId()+" ");
             particles.forEach(neighbor -> System.out.print(neighbor.getId() + " "));
             System.out.println("]");
+        });
+    }
+
+    public static void printParticlesInfo(List<Particle> particles, int state){
+        particles.forEach(particle -> {
+            System.out.println("ID: " + particle.getId() + " | Location: (" +
+                    particle.getStates().get(state).getX() + "," + particle.getStates().get(state).getY() + ")");
         });
     }
 }

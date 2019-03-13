@@ -11,7 +11,7 @@ import java.util.Map;
 public class Input {
 
     // Defined values
-    private final int systemSideLength = 20;
+    private final int systemSideLength = 5;
     private final Double interactionRadio = 1.0;
 
 

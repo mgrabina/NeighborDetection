@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class NeighborDetection {
-
+    // Program Arguments: "./NeighborDetection/resources/sample_input_static.txt" "./NeighborDetection/resources/sample_input_dinamic.txt"
     public static void main(String[] args) {
         Input input;
         Grid grid;
@@ -19,6 +19,7 @@ public class NeighborDetection {
         grid.setParticles(input.getParticles());
         Map<Particle, List<Particle>> result = getNeighbors(grid, grid.getUsedCells(), input.getInteractionRadio(), input.getContornCondition());
         Output.printGrid(grid);
+        Output.printParticlesInfo(input.getParticles(), 0);
         Output.printResult(result);
         Output.generateOutput(result);
     }
