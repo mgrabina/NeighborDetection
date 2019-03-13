@@ -12,7 +12,7 @@ public class Input {
 
     // Defined values
     private final int systemSideLength = 20;
-    private final Double interactionRadio = 0.25;
+    private final Double interactionRadio = 1.0;
 
 
     private Long particlesQuantity;

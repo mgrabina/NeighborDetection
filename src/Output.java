@@ -13,9 +13,20 @@ public class Output {
             FileWriter fileWriter = new FileWriter(FILENAME);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for(Map.Entry<Particle, List<Particle>> entry : neighbors.entrySet()){
-                bufferedWriter.write("[ " + entry.getKey().getId() + entry.getValue().stream().map(
-                        particle -> " " + particle.getId()) + "]");
+                bufferedWriter.write("[ " + entry.getKey().getId() + "  ");
+                entry.getValue().stream().forEach(particle -> {
+                    try {
+                        bufferedWriter.write(particle.getId() + " ");
+                    }catch (IOException e){
+                        // TODO: Handle IO Execption
+                    }
+                });
+                bufferedWriter.write("]");
+                bufferedWriter.newLine();
             }
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            fileWriter.close();
         }catch (IOException e){
             // TODO: Handle IO Execption
         }
@@ -31,5 +42,14 @@ public class Output {
             }
             System.out.println("");
         }
+    }
+
+    public static void printResult(Map<Particle, List<Particle>> result){
+        System.out.println("Result: ");
+        result.forEach((particle, particles) -> {
+            System.out.print("["+particle.getId()+" ");
+            particles.forEach(neighbor -> System.out.print(neighbor.getId() + " "));
+            System.out.println("]");
+        });
     }
 }

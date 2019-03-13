@@ -1,7 +1,7 @@
 5
 20
-0.25 Rojo
-0.25 Verde
-0.25 Azul
-0.25 Rojo
-0.25 Verde
+1 Rojo
+1 Verde
+1 Azul
+1 Rojo
+1 Verde

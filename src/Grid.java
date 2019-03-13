@@ -39,8 +39,8 @@ public class Grid {
         usedCells = new HashSet<>();
         Double cellSideLength = Double.valueOf(sideLength) / Double.valueOf(sideCellsQuantity);
         for (Particle particle : particles){
-            int row = Integer.valueOf(Math.toIntExact(Math.round(particle.getStates().get(0).getY() / cellSideLength)));
-            int column = Integer.valueOf(Math.toIntExact(Math.round(particle.getStates().get(0).getX() / cellSideLength)));
+            int row = (int)Math.floor(particle.getStates().get(0).getY() / cellSideLength); // Cast truncates
+            int column = (int)Math.floor(particle.getStates().get(0).getX() / cellSideLength); // Cast truncates
             cells[row][column].addParticle(particle);
             usedCells.add(new Pair(row, column));
         }

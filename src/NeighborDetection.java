@@ -17,8 +17,10 @@ public class NeighborDetection {
         }
         grid = new Grid(input.getCellSideQuantity(), input.getSystemSideLength());
         grid.setParticles(input.getParticles());
+        Map<Particle, List<Particle>> result = getNeighbors(grid, grid.getUsedCells(), input.getInteractionRadio(), input.getContornCondition());
         Output.printGrid(grid);
-        Output.generateOutput(getNeighbors(grid, grid.getUsedCells(), input.getInteractionRadio(), input.getContornCondition()));
+        Output.printResult(result);
+        Output.generateOutput(result);
     }
 
     /**
@@ -34,12 +36,24 @@ public class NeighborDetection {
         Map<Particle, List<Particle>> data = new HashMap<>();
         // Foreach cell with particles
         usedCells.forEach(pair -> {
-            int i = pair.getKey();
-            int j = pair.getValue();
+            int i = pair.getKey(), j = pair.getValue();
             for (Particle current : grid.getCell(i, j).getParticles()){
                 List<Particle> currentNeighbors = new ArrayList<>();
 
                 //Check the four neighbors taking advantage of the simetry.
+                if (i != 0)
+                    currentNeighbors.addAll(getNeighborParticles(current,
+                            grid.getCell(i-1, j), interactionRadio));
+                if (i != 0 && j != grid.getSideCellsQuantity() - 1)
+                    currentNeighbors.addAll(getNeighborParticles(current,
+                            grid.getCell(i-1, j+1), interactionRadio));
+                if (j != grid.getSideCellsQuantity() - 1)
+                    currentNeighbors.addAll(getNeighborParticles(current,
+                            grid.getCell(i, j+1), interactionRadio));
+                if (j != grid.getSideCellsQuantity() - 1 && i != grid.getSideCellsQuantity() - 1)
+                    currentNeighbors.addAll(getNeighborParticles(current,
+                            grid.getCell(i+1, j+1), interactionRadio));
+
                 if(j == 0 && i == grid.getSideCellsQuantity() - 1 && contornCondition){ // Top Right Corner
                     currentNeighbors.addAll(getNeighborParticles(current,
                             grid.getCell(0, grid.getSideCellsQuantity()-1), interactionRadio));
