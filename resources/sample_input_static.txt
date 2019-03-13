@@ -1,5 +1,10 @@
-5
+10
 20
+1 Rojo
+1 Verde
+1 Azul
+1 Rojo
+1 Verde
 1 Rojo
 1 Verde
 1 Azul
