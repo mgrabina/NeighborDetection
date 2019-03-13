@@ -34,12 +34,16 @@ public class NeighborDetection {
      * @return  A Map with a {@link List} of {@link Particle}s for each Particle.
      */
     private static Map<Particle, List<Particle>> getNeighbors(Grid grid, HashSet<Pair<Integer, Integer>> usedCells, Double interactionRadio, Boolean contornCondition){
-        Map<Particle, List<Particle>> data = new HashMap<>();
+        Map<Particle, List<Particle>> result = new HashMap<>();
         // Foreach cell with particles
         usedCells.forEach(pair -> {
             int i = pair.getKey(), j = pair.getValue();
             for (Particle current : grid.getCell(i, j).getParticles()){
                 List<Particle> currentNeighbors = new ArrayList<>();
+                List<Particle> sameCell = new ArrayList<>();
+
+                //get the neighboor added before or a new linked list
+                final List<Particle> neighbors = result.getOrDefault(current, new LinkedList<>());
 
                 //Check the four neighbors taking advantage of the simetry.
                 if (i != 0)
@@ -55,7 +59,11 @@ public class NeighborDetection {
                     currentNeighbors.addAll(getNeighborParticles(current,
                             grid.getCell(i+1, j+1), interactionRadio));
 
-                if(j == 0 && i == grid.getSideCellsQuantity() - 1 && contornCondition){ // Top Right Corner
+                //check same cell
+                sameCell.addAll(getNeighborParticles(current,
+                        grid.getCell(i, j), interactionRadio));
+
+/*                if(j == 0 && i == grid.getSideCellsQuantity() - 1 && contornCondition){ // Top Right Corner
                     currentNeighbors.addAll(getNeighborParticles(current,
                             grid.getCell(0, grid.getSideCellsQuantity()-1), interactionRadio));
                 }else if(j == 0 && contornCondition){                                   // Superior
@@ -68,12 +76,23 @@ public class NeighborDetection {
                         i == grid.getSideCellsQuantity() - 1 &&  contornCondition){     // Bottom Right Corner
                     currentNeighbors.addAll(getNeighborParticles(current,
                             grid.getCell(0, 0), interactionRadio));
+                }*/
+
+                //add all to the neighbors
+                neighbors.addAll(currentNeighbors);
+                neighbors.addAll(sameCell);
+
+                //for each neighbors add current to the relation
+                for (Particle newRelation : currentNeighbors) {
+                    final List<Particle> anotherNeighbors = result.getOrDefault(newRelation, new LinkedList<>());
+                    anotherNeighbors.add(current);
+                    result.put(newRelation, anotherNeighbors);
                 }
 
-                data.put(current, currentNeighbors);
+                result.put(current, neighbors);
             }
         });
-        return data;
+        return result;
     }
 
 
@@ -89,6 +108,7 @@ public class NeighborDetection {
         return cell.getParticles().stream()
                 .parallel()
                 .filter(another -> getDistance(current, another) <= interactionRadio)
+                .filter(another -> !current.equals(another))
                 .collect(Collectors.toList());
     }
 
