@@ -14,4 +14,8 @@ public class Cell {
     public int getParticlesQuantity(){
         return particles.size();
     }
+
+    public List<Particle> getParticles() {
+        return particles;
+    }
 }

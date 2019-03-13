@@ -1,15 +1,20 @@
+import javafx.util.Pair;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 public class Grid {
     private Cell[][] cells;
-    private Long sideCellsQuantity;
-    private Long sideLength;
+    private HashSet<Pair<Integer, Integer>> usedCells;
+    private int sideCellsQuantity;
+    private int sideLength;
 
-    public Grid(Long sideCellsQuantity, Long sideLength) {
+    public Grid(int sideCellsQuantity, int sideLength) {
         this.sideCellsQuantity = sideCellsQuantity;
-        this.cells = new Cell[sideCellsQuantity.intValue()][sideCellsQuantity.intValue()];
-        for (int i = 0 ; i < sideCellsQuantity.intValue() ; i++)
-            for (int j = 0 ; j < sideCellsQuantity.intValue() ; j++)
+        this.cells = new Cell[sideCellsQuantity][sideCellsQuantity];
+        for (int i = 0 ; i < sideCellsQuantity ; i++)
+            for (int j = 0 ; j < sideCellsQuantity ; j++)
                 this.cells[i][j] = new Cell();
         this.sideLength = sideLength;
     }
@@ -22,20 +27,26 @@ public class Grid {
         cells[x][y] = cell;
     }
 
-    public Long getSideCellsQuantity() {
+    public int getSideCellsQuantity() {
         return sideCellsQuantity;
     }
 
-    public Long getSideLength() {
+    public int getSideLength() {
         return sideLength;
     }
 
     public void setParticles(List<Particle> particles){
+        usedCells = new HashSet<>();
         Double cellSideLength = Double.valueOf(sideLength) / Double.valueOf(sideCellsQuantity);
         for (Particle particle : particles){
             int row = Integer.valueOf(Math.toIntExact(Math.round(particle.getStates().get(0).getY() / cellSideLength)));
             int column = Integer.valueOf(Math.toIntExact(Math.round(particle.getStates().get(0).getX() / cellSideLength)));
             cells[row][column].addParticle(particle);
+            usedCells.add(new Pair(row, column));
         }
+    }
+
+    public HashSet<Pair<Integer, Integer>> getUsedCells() {
+        return usedCells;
     }
 }

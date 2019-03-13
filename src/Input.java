@@ -11,13 +11,13 @@ import java.util.Map;
 public class Input {
 
     // Defined values
-    private final Long systemSideLength = Long.valueOf(20);
+    private final int systemSideLength = 20;
     private final Double interactionRadio = 0.25;
 
 
     private Long particlesQuantity;
 
-    private Long cellSideQuantity;
+    private int cellSideQuantity;
 
     private List<Particle> particles;
 
@@ -31,7 +31,7 @@ public class Input {
             staticFileReader = new BufferedReader(new FileReader(staticFileName));
             dinamicFileReader = new BufferedReader(new FileReader(dinamicFileName));
             this.particlesQuantity = Long.valueOf(staticFileReader.readLine());
-            this.cellSideQuantity = Long.valueOf(staticFileReader.readLine());
+            this.cellSideQuantity = Integer.valueOf(staticFileReader.readLine());
             this.particles = new ArrayList<>();
             dinamicFileReader.readLine();  //Discard first time notation
             while(staticFileReader.ready()){    //Only time zero for dinamic file
@@ -63,11 +63,11 @@ public class Input {
         return particlesQuantity;
     }
 
-    public Long getCellSideQuantity() {
+    public int getCellSideQuantity() {
         return cellSideQuantity;
     }
 
-    public Long getSystemSideLength() {
+    public int getSystemSideLength() {
         return systemSideLength;
     }
 
