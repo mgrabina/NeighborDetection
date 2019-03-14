@@ -67,21 +67,21 @@ public class NeighborDetection {
                 sameCell.addAll(getNeighborParticles(current,
                         grid.getCell(i, j), interactionRadio));
 
-                if(j == 0 && i == grid.getSideCellsQuantity() - 1 && contornCondition){ // Top Right Corner
-                    currentNeighbors.addAll(getNeighborParticles(current,
-                            grid.getCell(0, grid.getSideCellsQuantity()-1), interactionRadio));
-                }else if(j == 0 && contornCondition){                                   // Superior
-                    currentNeighbors.addAll(getNeighborParticles(current,
-                            grid.getCell(i, grid.getSideCellsQuantity()-1), interactionRadio));
-                }else if(i == grid.getSideCellsQuantity() - 1 && contornCondition){     // Right border
-                    currentNeighbors.addAll(getNeighborParticles(current,
-                            grid.getCell(0, j), interactionRadio));
-                }else if(j == grid.getSideCellsQuantity() - 1 &&
-                        i == grid.getSideCellsQuantity() - 1 &&  contornCondition) {     // Bottom Right Corner
-                    currentNeighbors.addAll(getNeighborParticles(current,
-                            grid.getCell(0, 0), interactionRadio));
+                if (contornCondition){
+                    if(j == 0 && i == grid.getSideCellsQuantity() - 1){ // Top Right Corner
+                        currentNeighbors.addAll(getNeighborParticles(current,
+                                grid.getCell(0, grid.getSideCellsQuantity()-1), interactionRadio));
+                    }else if(j == 0){                                   // Superior
+                        currentNeighbors.addAll(getNeighborParticles(current,
+                                grid.getCell(i, grid.getSideCellsQuantity()-1), interactionRadio));
+                    }else if(i == grid.getSideCellsQuantity() - 1){     // Right border
+                        currentNeighbors.addAll(getNeighborParticles(current,
+                                grid.getCell(0, j), interactionRadio));
+                    }else if(j == grid.getSideCellsQuantity() - 1 && i == grid.getSideCellsQuantity() - 1) {     // Bottom Right Corner
+                        currentNeighbors.addAll(getNeighborParticles(current,
+                                grid.getCell(0, 0), interactionRadio));
+                    }
                 }
-
 
                 //add all to the neighbors
                 neighbors.addAll(currentNeighbors);
