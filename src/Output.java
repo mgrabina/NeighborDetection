@@ -55,7 +55,7 @@ public class Output {
 
     public static void printParticlesInfo(List<Particle> particles, int state){
         particles.forEach(particle -> {
-            System.out.println("ID: " + particle.getId() + " | Location: (" +
+            System.out.println("ID: " + particle.getId() + " | Radio: " + particle.getRadio() + " | Location: (" +
                     particle.getStates().get(state).getX() + "," + particle.getStates().get(state).getY() + ")");
         });
     }

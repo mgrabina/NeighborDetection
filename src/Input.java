@@ -1,6 +1,3 @@
-import com.sun.javaws.exceptions.InvalidArgumentException;
-
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,21 +7,20 @@ import java.util.List;
 public class Input {
 
     // Defined values
-    private final int defaultSystemSideLength = 20;
-    private final Double defaultInteractionRadio = 1.0;
-
-    private final int MAX_SYSTEM_SIDE_LENGTH = 100;
-    private final int MIN_SYSTEM_SIDE_LENGTH = 10;
-    private final Double MAX_INTERACTION_RADIO = 5.0;
-    private final Double MIN_INTERACTION_RADIO = 0.1;
-    private final Long MAX_PARTICLE_QUANTITY = Long.valueOf(1000);
-    private final Long MIN_PARTICLE_QUANTITY = Long.valueOf(3);
-    private final int MAX_CELL_SIDE_QUANTITY = 100;
-    private final int MIN_CELL_SIDE_QUANTITY = 10;
-    private final Double MAX_PARTICLE_RADIO = 5.0;
-    private final Double MIN_PARTICLE_RADIO = 0.1;
-    private final Double MIN_VELOCITY = 0.1;
-    private final Double MAX_VELOCITY = 20.0;
+    private static int defaultSystemSideLength = 20;
+    private static Double defaultInteractionRadio = 1.0;
+    private static int MAX_SYSTEM_SIDE_LENGTH = 100;
+    private static int MIN_SYSTEM_SIDE_LENGTH = 10;
+    private static Double MAX_INTERACTION_RADIO = 5.0;
+    private static Double MIN_INTERACTION_RADIO = 0.1;
+    private static Long MAX_PARTICLE_QUANTITY = Long.valueOf(1000);
+    private static Long MIN_PARTICLE_QUANTITY = Long.valueOf(3);
+    private static int MAX_CELL_SIDE_QUANTITY = 100;
+    private static int MIN_CELL_SIDE_QUANTITY = 10;
+    private static Double MAX_PARTICLE_RADIO = 5.0;
+    private static Double MIN_PARTICLE_RADIO = 0.1;
+    private static Double MIN_VELOCITY = 0.1;
+    private static Double MAX_VELOCITY = 20.0;
 
     private Long particlesQuantity;
     private int cellSideQuantity;
@@ -34,7 +30,7 @@ public class Input {
     private Double interactionRadio;
 
     /**
-     * Empty constructor generates random inputs
+     * Empty constructor generates random inputs based in the max and min setted for each variable.
      */
     public Input(){
         Random random = new Random();
@@ -56,6 +52,14 @@ public class Input {
         }
     }
 
+    /**
+     * A constructor that generates an {@link Input} instance obtaining parameters from input files.
+     *
+     * @param staticFileName        The static parameters file, such as side length.
+     * @param dinamicFileName       The dinamic parameters file, such as velocity in one state for each particle.
+     * @param contornCondition      If the contorn condition is on.
+     * @throws IOException          e.g. if one of the files cannot be founded.
+     */
     public Input(String staticFileName, String dinamicFileName, Boolean contornCondition) throws IOException{
         this.contornCondition = contornCondition;
         this.systemSideLength = defaultSystemSideLength;
