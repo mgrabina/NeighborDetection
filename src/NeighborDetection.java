@@ -15,13 +15,17 @@ public class NeighborDetection {
             input = null;
 //            Handle Exception
         }
-        grid = new Grid(input.getCellSideQuantity(), input.getSystemSideLength());
-        grid.setParticles(input.getParticles());
-        Map<Particle, List<Particle>> result = getNeighbors(grid, grid.getUsedCells(), input.getInteractionRadio(), input.getContornCondition());
-        Output.printGrid(grid);
-        Output.printParticlesInfo(input.getParticles(), 0);
-        Output.printResult(result);
-        Output.generateOutput(result);
+
+        for (int repetitions = 0 ; repetitions < 5 ; repetitions++ ){
+            input = new Input();
+            grid = new Grid(input.getCellSideQuantity(), input.getSystemSideLength());
+            grid.setParticles(input.getParticles());
+            Map<Particle, List<Particle>> result = getNeighbors(grid, grid.getUsedCells(), input.getInteractionRadio(), input.getContornCondition());
+            Output.printGrid(grid);
+            Output.printParticlesInfo(input.getParticles(), 0);
+            Output.printResult(result);
+            Output.generateOutput(result);
+        }
     }
 
     /**
