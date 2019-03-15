@@ -28,7 +28,7 @@ public class Input {
     private Boolean contornCondition;
     private int systemSideLength;
     private Double interactionRadio;
-    private Particle selectedParticle=null;
+    private Particle selectedParticle;
 
     /**
      * Empty constructor generates random inputs based in the max and min setted for each variable.
@@ -51,6 +51,7 @@ public class Input {
                     random.nextDouble() * MAX_VELOCITY + MIN_VELOCITY
             ));
         }
+        this.selectedParticle = this.particles.get(random.nextInt(this.particles.size()));
     }
 
     /**
@@ -61,10 +62,7 @@ public class Input {
      * @param contornCondition      If the contorn condition is on.
      * @throws IOException          e.g. if one of the files cannot be founded.
      */
-    public Input(String staticFileName, String dinamicFileName, Boolean contornCondition, String[] args) throws IOException{
-        Integer particleId=null;
-        if(args.length>1)
-            particleId=Integer.parseInt(args[2]);
+    public Input(String staticFileName, String dinamicFileName, Boolean contornCondition, Long particleId) throws IOException{
         this.contornCondition = contornCondition;
         this.systemSideLength = defaultSystemSideLength;
         this.interactionRadio = defaultInteractionRadio;
@@ -88,7 +86,7 @@ public class Input {
                         Double.valueOf(dinamicLineValues[2]),
                         Double.valueOf(dinamicLineValues[3])
                 );
-                if( particleId!= null && p.getId()==particleId.longValue())
+                if( particleId != null && p.getId()==particleId.longValue())
                     this.selectedParticle = p;
                 particles.add(p);
             }

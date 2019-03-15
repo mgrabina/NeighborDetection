@@ -103,7 +103,7 @@ public class Output {
             }
             particles.remove(selectedParticle);
             for (Particle particle: particles){
-                printToFile(bufferedWriter,particle,0,0,0);
+                printToFile(bufferedWriter,particle,0,255,255);
             }
             bufferedWriter.flush();
             bufferedWriter.close();

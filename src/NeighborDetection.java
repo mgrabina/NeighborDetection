@@ -9,10 +9,12 @@ public class NeighborDetection {
     public static void main(String[] args) throws IOException {
         Input input;
         Grid grid;
-        if (args.length>1)
-            input = new Input(args[0], args[1], false,args);
-        else
+        if(System.getProperty("static") != null && System.getProperty("dinamic") != null){
+            input = new Input(args[0], args[1], false, Long.valueOf(System.getProperty("id")));
+            //TODO: Validate id as valid long
+        }else{
             input = new Input();
+        }
         grid = new Grid(input.getCellSideQuantity(), input.getSystemSideLength());
         grid.setParticles(input.getParticles());
         Map<Particle, List<Particle>> result = getNeighbors(grid, grid.getUsedCells(), input.getInteractionRadio(), input.getContornCondition());
