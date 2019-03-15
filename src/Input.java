@@ -17,7 +17,7 @@ public class Input {
     private static int MIN_PARTICLE_QUANTITY = Integer.valueOf(50);
     private static int MAX_CELL_SIDE_QUANTITY = 100;
     private static int MIN_CELL_SIDE_QUANTITY = 10;
-    private static Double MAX_PARTICLE_RADIO = 1.0;
+    private static Double MAX_PARTICLE_RADIO = 0.6;
     private static Double MIN_PARTICLE_RADIO = 0.5;
     private static Double MIN_VELOCITY = 0.1;
     private static Double MAX_VELOCITY = 20.0;
