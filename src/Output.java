@@ -1,8 +1,11 @@
+import sun.security.krb5.internal.PAData;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Output {
     private final static String FILENAME = "output.txt";
@@ -82,5 +85,39 @@ public class Output {
             System.out.println("ID: " + particle.getId() + " | Radio: " + particle.getRadio() + " | Location: (" +
                     particle.getStates().get(state).getX() + "," + particle.getStates().get(state).getY() + ")");
         });
+    }
+
+    public static void generatePositionOutput(Map<Particle,List<Particle>> result, Particle selectedParticle) {
+        Set<Particle> particles = result.keySet();
+        if (particles == null) return; //TODO: Throw exception
+        try{
+            FileWriter fileWriter = new FileWriter(FILENAME2);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(Integer.valueOf(particles.size()).toString());
+            bufferedWriter.newLine();
+
+            printToFile(bufferedWriter, selectedParticle,255,0,0);
+            for (Particle particle: result.get(selectedParticle)){
+                printToFile(bufferedWriter,particle,255,255,255);
+                particles.remove(particle);
+            }
+            particles.remove(selectedParticle);
+            for (Particle particle: particles){
+                printToFile(bufferedWriter,particle,0,0,0);
+            }
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            fileWriter.close();
+        }catch (IOException e){
+            // TODO: Handle IO Execption
+        }
+    }
+
+    public static void printToFile(BufferedWriter bufferedWriter, Particle particle, Integer r,Integer g, Integer b) throws IOException {
+        bufferedWriter.newLine();
+        String print = particle.getId() + " " + particle.getStates().get(0).getX()
+                + " " + particle.getStates().get(0).getY()
+                + " " + particle.getRadio() + " " + r.toString() + " " + g.toString() + " " + b.toString() + " ";
+        bufferedWriter.write(print);
     }
 }

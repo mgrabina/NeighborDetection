@@ -10,7 +10,7 @@ public class NeighborDetection {
         Input input;
         Grid grid;
         if (args.length>1)
-            input = new Input(args[0], args[1], false);
+            input = new Input(args[0], args[1], false,args);
         else
             input = new Input();
         grid = new Grid(input.getCellSideQuantity(), input.getSystemSideLength());
@@ -20,7 +20,10 @@ public class NeighborDetection {
         Output.printParticlesInfo(input.getParticles(), 0);
         Output.printResult(result);
         Output.generateOutput(result);
-        Output.generatePositionOutput(input.getParticles());
+        if(input.getSelectedParticle()!=null)
+            Output.generatePositionOutput(result,input.getSelectedParticle());
+        else
+            Output.generatePositionOutput(input.getParticles());
 
     }
 
