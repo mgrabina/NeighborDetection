@@ -9,7 +9,7 @@ public class NeighborDetection {
     public static void main(String[] args) throws IOException {
         Input input;
         Grid grid;
-        if(args[0] != null && args[1] != null){
+        if(args.length > 0 && args[0] != null && args[1] != null){
             input = new Input(args[0], args[1], false, Long.valueOf(args[2]));
             //TODO: Validate id as valid long
         }else{
@@ -17,7 +17,9 @@ public class NeighborDetection {
         }
         grid = new Grid(input.getCellSideQuantity(), input.getSystemSideLength());
         grid.setParticles(input.getParticles());
+        long startTime = System.currentTimeMillis();
         Map<Particle, List<Particle>> result = getNeighbors(grid, grid.getUsedCells(), input.getInteractionRadio(), input.getContornCondition());
+        long endTime = System.currentTimeMillis();
         Output.printGrid(grid);
         Output.printParticlesInfo(input.getParticles(), 0);
         Output.printResult(result);
@@ -27,6 +29,8 @@ public class NeighborDetection {
         else
             Output.generatePositionOutput(input.getParticles());
 
+        long duration = (endTime - startTime);
+        System.out.println("Duration: "+ duration);
     }
 
     /**
