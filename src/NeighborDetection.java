@@ -25,6 +25,7 @@ public class NeighborDetection {
             Output.printParticlesInfo(input.getParticles(), 0);
             Output.printResult(result);
             Output.generateOutput(result);
+            Output.generatePositionOutput(input.getParticles());
         }
     }
 
@@ -112,7 +113,7 @@ public class NeighborDetection {
     private static List<Particle> getNeighborParticles(Particle current, Cell cell, Double interactionRadio){
         return cell.getParticles().stream()
                 .parallel()
-                .filter(another -> getDistance(current, another) <= interactionRadio)
+                .filter(another -> getDistance(current, another) - current.getRadio() <= interactionRadio)
                 .filter(another -> !current.equals(another))
                 .collect(Collectors.toList());
     }

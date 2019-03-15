@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class Output {
     private final static String FILENAME = "output.txt";
+    private final static String FILENAME2 = "positions.xyz";
 
     public static void generateOutput(Map<Particle, List<Particle>> neighbors){
         if (neighbors == null) return; //TODO: Throw exception
@@ -22,6 +23,29 @@ public class Output {
                     }
                 });
                 bufferedWriter.write("]");
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            fileWriter.close();
+        }catch (IOException e){
+            // TODO: Handle IO Execption
+        }
+    }
+
+    public static void generatePositionOutput(List<Particle> particles){
+        if (particles == null) return; //TODO: Throw exception
+        try{
+            FileWriter fileWriter = new FileWriter(FILENAME2);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(Integer.valueOf(particles.size()).toString());
+            bufferedWriter.newLine();
+            bufferedWriter.newLine();
+            for (int i = 0 ; i < particles.size() ; i++){
+                bufferedWriter.write(particles.get(i).getId() + " " + particles.get(i).getStates().get(0).getX()
+                        + " " + particles.get(i).getStates().get(0).getY() + " "
+                        + " " + particles.get(i).getRadio() + " ");
+                if (i < particles.size() - 1)
                 bufferedWriter.newLine();
             }
             bufferedWriter.flush();
