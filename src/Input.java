@@ -34,13 +34,13 @@ public class Input {
      */
     public Input(){
         Random random = new Random();
-        {
+        do{
             this.systemSideLength = random.nextInt(MAX_SYSTEM_SIDE_LENGTH - MIN_SYSTEM_SIDE_LENGTH + 1) + MIN_SYSTEM_SIDE_LENGTH;
             this.interactionRadio = random.nextDouble() * MAX_INTERACTION_RADIO + MIN_INTERACTION_RADIO;
             this.cellSideQuantity = random.nextInt(MAX_CELL_SIDE_QUANTITY - MIN_CELL_SIDE_QUANTITY + 1) + MIN_CELL_SIDE_QUANTITY;
             this.particlesQuantity = random.nextLong() % MAX_PARTICLE_QUANTITY + MIN_PARTICLE_QUANTITY;
             this.contornCondition = random.nextBoolean();
-        } while ( (double) this.systemSideLength / (double) this.cellSideQuantity > this.interactionRadio)
+        } while ( (double) this.systemSideLength / (double) this.cellSideQuantity <= this.interactionRadio );
         this.particles = new ArrayList<>();
         for (int i = 0 ; i < this.particlesQuantity ; i++){
             this.particles.add(new Particle(
