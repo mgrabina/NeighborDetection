@@ -6,27 +6,22 @@ import java.util.stream.Collectors;
 
 public class NeighborDetection {
     // Program Arguments: "./NeighborDetection/resources/sample_input_static.txt" "./NeighborDetection/resources/sample_input_dinamic.txt"
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Input input;
         Grid grid;
-        try{
+        if (args.length>1)
             input = new Input(args[0], args[1], false);
-        }catch (IOException e){
-            input = null;
-//            Handle Exception
-        }
-
-        for (int repetitions = 0 ; repetitions < 5 ; repetitions++ ){
+        else
             input = new Input();
-            grid = new Grid(input.getCellSideQuantity(), input.getSystemSideLength());
-            grid.setParticles(input.getParticles());
-            Map<Particle, List<Particle>> result = getNeighbors(grid, grid.getUsedCells(), input.getInteractionRadio(), input.getContornCondition());
-            Output.printGrid(grid);
-            Output.printParticlesInfo(input.getParticles(), 0);
-            Output.printResult(result);
-            Output.generateOutput(result);
-            Output.generatePositionOutput(input.getParticles());
-        }
+        grid = new Grid(input.getCellSideQuantity(), input.getSystemSideLength());
+        grid.setParticles(input.getParticles());
+        Map<Particle, List<Particle>> result = getNeighbors(grid, grid.getUsedCells(), input.getInteractionRadio(), input.getContornCondition());
+        Output.printGrid(grid);
+        Output.printParticlesInfo(input.getParticles(), 0);
+        Output.printResult(result);
+        Output.generateOutput(result);
+        Output.generatePositionOutput(input.getParticles());
+
     }
 
     /**

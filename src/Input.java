@@ -13,8 +13,8 @@ public class Input {
     private static int MIN_SYSTEM_SIDE_LENGTH = 10;
     private static Double MAX_INTERACTION_RADIO = 5.0;
     private static Double MIN_INTERACTION_RADIO = 1.1;
-    private static Long MAX_PARTICLE_QUANTITY = Long.valueOf(1000);
-    private static Long MIN_PARTICLE_QUANTITY = Long.valueOf(3);
+    private static int MAX_PARTICLE_QUANTITY = Integer.valueOf(1000);
+    private static int MIN_PARTICLE_QUANTITY = Integer.valueOf(3);
     private static int MAX_CELL_SIDE_QUANTITY = 100;
     private static int MIN_CELL_SIDE_QUANTITY = 10;
     private static Double MAX_PARTICLE_RADIO = 1.0;
@@ -34,13 +34,11 @@ public class Input {
      */
     public Input(){
         Random random = new Random();
-        do{
-            this.systemSideLength = random.nextInt(MAX_SYSTEM_SIDE_LENGTH - MIN_SYSTEM_SIDE_LENGTH + 1) + MIN_SYSTEM_SIDE_LENGTH;
-            this.interactionRadio = random.nextDouble() * MAX_INTERACTION_RADIO + MIN_INTERACTION_RADIO;
-            this.cellSideQuantity = random.nextInt(MAX_CELL_SIDE_QUANTITY - MIN_CELL_SIDE_QUANTITY + 1) + MIN_CELL_SIDE_QUANTITY;
-            this.particlesQuantity = random.nextLong() % MAX_PARTICLE_QUANTITY + MIN_PARTICLE_QUANTITY;
-            this.contornCondition = random.nextBoolean();
-        } while ( (double) this.systemSideLength / (double) this.cellSideQuantity <= this.interactionRadio );
+        this.systemSideLength = random.nextInt(MAX_SYSTEM_SIDE_LENGTH - MIN_SYSTEM_SIDE_LENGTH + 1) + MIN_SYSTEM_SIDE_LENGTH;
+        this.cellSideQuantity = random.nextInt(MAX_CELL_SIDE_QUANTITY - MIN_CELL_SIDE_QUANTITY + 1) + MIN_CELL_SIDE_QUANTITY;
+        this.particlesQuantity = (long) random.nextInt(MAX_PARTICLE_QUANTITY - MIN_PARTICLE_QUANTITY + 1) + MIN_PARTICLE_QUANTITY;
+        this.contornCondition = random.nextBoolean();
+        this.interactionRadio = (random.nextDouble() * MAX_INTERACTION_RADIO + MIN_INTERACTION_RADIO) % (this.systemSideLength / (double) this.cellSideQuantity);
         this.particles = new ArrayList<>();
         for (int i = 0 ; i < this.particlesQuantity ; i++){
             this.particles.add(new Particle(
