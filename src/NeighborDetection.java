@@ -9,8 +9,8 @@ public class NeighborDetection {
     public static void main(String[] args) throws IOException {
         Input input;
         Grid grid;
-        if(System.getProperty("static") != null && System.getProperty("dinamic") != null){
-            input = new Input(args[0], args[1], false, Long.valueOf(System.getProperty("id")));
+        if(args[0] != null && args[1] != null){
+            input = new Input(args[0], args[1], false, Long.valueOf(args[2]));
             //TODO: Validate id as valid long
         }else{
             input = new Input();

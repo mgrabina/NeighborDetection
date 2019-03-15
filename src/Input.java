@@ -12,7 +12,7 @@ public class Input {
     private static int MAX_SYSTEM_SIDE_LENGTH = 100;
     private static int MIN_SYSTEM_SIDE_LENGTH = 10;
     private static Double MAX_INTERACTION_RADIO = 5.0;
-    private static Double MIN_INTERACTION_RADIO = 1.1;
+    private static Double MIN_INTERACTION_RADIO = 0.25;
     private static int MAX_PARTICLE_QUANTITY = Integer.valueOf(1000);
     private static int MIN_PARTICLE_QUANTITY = Integer.valueOf(3);
     private static int MAX_CELL_SIDE_QUANTITY = 100;
