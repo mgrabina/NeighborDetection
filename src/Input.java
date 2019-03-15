@@ -9,16 +9,16 @@ public class Input {
     // Defined values
     private static int defaultSystemSideLength = 20;
     private static Double defaultInteractionRadio = 1.0;
-    private static int MAX_SYSTEM_SIDE_LENGTH = 100;
+    private static int MAX_SYSTEM_SIDE_LENGTH = 40;
     private static int MIN_SYSTEM_SIDE_LENGTH = 10;
-    private static Double MAX_INTERACTION_RADIO = 5.0;
-    private static Double MIN_INTERACTION_RADIO = 0.25;
-    private static int MAX_PARTICLE_QUANTITY = Integer.valueOf(1000);
-    private static int MIN_PARTICLE_QUANTITY = Integer.valueOf(3);
+    private static Double MAX_INTERACTION_RADIO = 3.0;
+    private static Double MIN_INTERACTION_RADIO = 1.1;
+    private static int MAX_PARTICLE_QUANTITY = Integer.valueOf(200);
+    private static int MIN_PARTICLE_QUANTITY = Integer.valueOf(50);
     private static int MAX_CELL_SIDE_QUANTITY = 100;
     private static int MIN_CELL_SIDE_QUANTITY = 10;
     private static Double MAX_PARTICLE_RADIO = 1.0;
-    private static Double MIN_PARTICLE_RADIO = 0.1;
+    private static Double MIN_PARTICLE_RADIO = 0.5;
     private static Double MIN_VELOCITY = 0.1;
     private static Double MAX_VELOCITY = 20.0;
 
@@ -39,7 +39,9 @@ public class Input {
         this.cellSideQuantity = random.nextInt(MAX_CELL_SIDE_QUANTITY - MIN_CELL_SIDE_QUANTITY + 1) + MIN_CELL_SIDE_QUANTITY;
         this.particlesQuantity = (long) random.nextInt(MAX_PARTICLE_QUANTITY - MIN_PARTICLE_QUANTITY + 1) + MIN_PARTICLE_QUANTITY;
         this.contornCondition = random.nextBoolean();
-        this.interactionRadio = (random.nextDouble() * MAX_INTERACTION_RADIO + MIN_INTERACTION_RADIO) % (this.systemSideLength / (double) this.cellSideQuantity);
+        this.interactionRadio = (random.nextDouble() * MAX_INTERACTION_RADIO + MIN_INTERACTION_RADIO) + MIN_INTERACTION_RADIO;
+//         % (this.systemSideLength / (double) this.cellSideQuantity)
+        this.cellSideQuantity = random.nextInt(MAX_CELL_SIDE_QUANTITY - MIN_CELL_SIDE_QUANTITY + 1) % (int)((double)this.systemSideLength / this.interactionRadio);
         this.particles = new ArrayList<>();
         for (int i = 0 ; i < this.particlesQuantity ; i++){
             this.particles.add(new Particle(
