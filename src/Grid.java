@@ -23,6 +23,11 @@ public class Grid {
         return cells[x][y];
     }
 
+    public Cell getSideCell(int x, int y){
+        return cells[Math.floorMod(x, sideCellsQuantity)][Math.floorMod(y, sideCellsQuantity)];
+        }
+
+
     public void setCell(int x, int y, Cell cell){
         cells[x][y] = cell;
     }
