@@ -96,14 +96,14 @@ public class Output {
             bufferedWriter.write(Integer.valueOf(particles.size()).toString());
             bufferedWriter.newLine();
 
-            printToFile(bufferedWriter, selectedParticle,255,0,0);
+            printToFile(bufferedWriter, selectedParticle,255,0,0, 0.1);
             for (Particle particle: result.get(selectedParticle)){
-                printToFile(bufferedWriter,particle,255,255,255);
+                printToFile(bufferedWriter,particle,255,255,255, 0.4);
                 particles.remove(particle);
             }
             particles.remove(selectedParticle);
             for (Particle particle: particles){
-                printToFile(bufferedWriter,particle,0,255,255);
+                printToFile(bufferedWriter,particle,0,255,255, 0.8);
             }
             bufferedWriter.flush();
             bufferedWriter.close();
@@ -113,11 +113,11 @@ public class Output {
         }
     }
 
-    public static void printToFile(BufferedWriter bufferedWriter, Particle particle, Integer r,Integer g, Integer b) throws IOException {
+    public static void printToFile(BufferedWriter bufferedWriter, Particle particle, Integer r,Integer g, Integer b, Double transparency) throws IOException {
         bufferedWriter.newLine();
         String print = particle.getId() + " " + particle.getStates().get(0).getX()
                 + " " + particle.getStates().get(0).getY()
-                + " " + particle.getRadio() + " " + r.toString() + " " + g.toString() + " " + b.toString() + " ";
+                + " " + particle.getRadio() + " " + r.toString() + " " + g.toString() + " " + b.toString() + " " + transparency.toString();
         bufferedWriter.write(print);
     }
 }
