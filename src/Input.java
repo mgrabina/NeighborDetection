@@ -54,6 +54,8 @@ public class Input {
             ));
         }
         this.selectedParticle = this.particles.get(random.nextInt(this.particles.size()));
+
+        Output.generateInputFiles(this.particlesQuantity, this.systemSideLength, this.particles);
     }
 
     /**

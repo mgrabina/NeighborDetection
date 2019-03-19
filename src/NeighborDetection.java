@@ -20,7 +20,7 @@ public class NeighborDetection {
         long startTime = System.currentTimeMillis();
         Map<Particle, List<Particle>> result = getNeighbors(grid, grid.getUsedCells(), input.getInteractionRadio(), input.getContornCondition());
         long endTime = System.currentTimeMillis();
-        Output.printGrid(grid);
+//        Output.printGrid(grid);
         //Output.printParticlesInfo(input.getParticles(), 0);
         //Output.printResult(result);
         //Output.generateOutput(result);

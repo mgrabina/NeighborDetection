@@ -10,6 +10,8 @@ import java.util.Set;
 public class Output {
     private final static String FILENAME = "output.txt";
     private final static String FILENAME2 = "positions.xyz";
+    private final static String STATIC_FILE = "sample_input_static.txt";
+    private final static String DINAMIC_FILE = "sample_input_dinamic.txt";
 
     public static void generateOutput(Map<Particle, List<Particle>> neighbors){
         if (neighbors == null) return; //TODO: Throw exception
@@ -119,5 +121,66 @@ public class Output {
                 + " " + particle.getStates().get(0).getY()
                 + " " + particle.getRadio() + " " + r.toString() + " " + g.toString() + " " + b.toString() + " " + transparency.toString();
         bufferedWriter.write(print);
+    }
+
+    public static void generateInputFiles(Long n, int l, List<Particle> particles){
+        try{
+            FileWriter fileWriter = new FileWriter(STATIC_FILE);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(String.valueOf(n));
+            bufferedWriter.newLine();
+            bufferedWriter.write(String.valueOf(l));
+            bufferedWriter.newLine();
+            for (int i = 0 ; i < particles.size() ; i++){
+                bufferedWriter.write(particles.get(i).getRadio() + " " + particles.get(i).getProperty());
+                if (i != particles.size() - 1 ){
+                    bufferedWriter.newLine();
+                }
+            }
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            fileWriter.close();
+        }catch(IOException e){
+            System.out.println(e);
+        }
+
+        try{
+            FileWriter fileWriter = new FileWriter(DINAMIC_FILE);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            for (int i = 0 ; i < particles.get(0).getStates().size() ; i++){
+                bufferedWriter.write(String.valueOf(i));
+                bufferedWriter.newLine();
+                for (int p = 0 ; p < particles.size() ; p++){
+                    bufferedWriter.write(
+                        particles.get(p).getStates().get(i).getX() + " " +
+                            particles.get(p).getStates().get(i).getY() + " " +
+                            particles.get(p).getStates().get(i).getVx() + " " +
+                            particles.get(p).getStates().get(i).getVy()
+                        );
+                    if (p != particles.size() - 1){
+                        bufferedWriter.newLine();
+                    }
+                }
+                if (i != particles.get(0).getStates().size() - 1){
+                    bufferedWriter.newLine();
+                }
+            }
+            bufferedWriter.write(n.toString());
+            bufferedWriter.newLine();
+            bufferedWriter.write(l);
+            bufferedWriter.newLine();
+            for (int i = 0 ; i < particles.size() ; i++){
+                bufferedWriter.write(particles.get(i).getRadio() + " " + particles.get(i).getProperty());
+                if (i != particles.size() - 1 ){
+                    bufferedWriter.newLine();
+                }
+            }
+            bufferedWriter.flush();
+            bufferedWriter.close();
+            fileWriter.close();
+        }catch(IOException e){
+            System.out.println(e);
+        }
+
     }
 }
