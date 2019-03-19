@@ -181,6 +181,14 @@ public class Output {
         }catch(IOException e){
             System.out.println(e);
         }
+    }
 
+    public static void printExecutionData(long duration, Input input){
+        System.out.println("M: " + input.getCellSideQuantity());
+        System.out.println("N: " + input.getParticlesQuantity());
+        System.out.println("Rc: " + input.getInteractionRadio());
+        System.out.println("L: " + input.getSystemSideLength());
+        System.out.println("Contorn: " + input.getContornCondition());
+        System.out.println("Duration: " + duration);
     }
 }

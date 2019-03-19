@@ -30,7 +30,7 @@ public class NeighborDetection {
             Output.generatePositionOutput(input.getParticles());
 
         long duration = (endTime - startTime);
-        System.out.println("Duration: "+ duration);
+        Output.printExecutionData(duration, input);
     }
 
     /**

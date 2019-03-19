@@ -14,8 +14,8 @@ public class Input {
     private static int MIN_SYSTEM_SIDE_LENGTH = 10;
     private static Double MAX_INTERACTION_RADIO = 3.0;
     private static Double MIN_INTERACTION_RADIO = 1.1;
-    private static int MAX_PARTICLE_QUANTITY = Integer.valueOf(200);
-    private static int MIN_PARTICLE_QUANTITY = Integer.valueOf(50);
+    private static int MAX_PARTICLE_QUANTITY = Integer.valueOf(10000);
+    private static int MIN_PARTICLE_QUANTITY = Integer.valueOf(10000);
     private static int MAX_CELL_SIDE_QUANTITY = 100;
     private static int MIN_CELL_SIDE_QUANTITY = 10;
     private static Double MAX_PARTICLE_RADIO = 0.6;
